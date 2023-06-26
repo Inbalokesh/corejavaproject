@@ -21,6 +21,23 @@ public class UserService {
 		
 	}
 	
+	public void create() {
+		User newUser = new User();
+		
+		newUser.setId(12345);
+		newUser.setEmail("inba@gmail.com");
+		newUser.setFirstName("Inba");
+		newUser.setLastName("Lokesh");
+		newUser.setPassword("1234");
+		newUser.setActive(true);
+		
+		UserDAO newUserDao = new UserDAO();
+		newUserDao.create(newUser);
+		
+		
+		
+	}
+	
 	
 
 }
