@@ -34,9 +34,7 @@ public class UserService {
 		updateUser.setFirstName("Vanakam da");
 		updateUser.setLastName("Maapla");
 		updateUser.setPassword("14333");
-
 		UserDAO newUserDao = new UserDAO();
-
 		newUserDao.update(updateUser.getId(), updateUser);
 
 	}
@@ -54,3 +52,4 @@ public class UserService {
 	}
 
 }
+
