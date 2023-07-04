@@ -26,7 +26,6 @@ public class UserService {
 		UserValidator.validate(newUser);
 		UserDAO userDao = new UserDAO();
 		userDao.create(newUser);
-
 	}
 
 	public void update() {

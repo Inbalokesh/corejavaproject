@@ -88,9 +88,7 @@ public class UserDAO {
 				break;
 			}
 		}
-		return userMatch;
-		
-		
+		return userMatch;	
 	}
 	
 	
