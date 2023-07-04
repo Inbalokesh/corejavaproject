@@ -1,6 +1,11 @@
 package in.inbalokesh.onlyhomefood;
 
+import java.time.LocalDate;
+
+import in.inbalokesh.onlyhomefood.exception.ValidationException;
+import in.inbalokesh.onlyhomefood.model.Task;
 import in.inbalokesh.onlyhomefood.model.User;
+import in.inbalokesh.onlyhomefood.service.TaskService;
 import in.inbalokesh.onlyhomefood.service.UserService;
 
 public class App {
@@ -29,7 +34,25 @@ public class App {
 //		userService.update();
 //		userService.delete();
 //		userService.findUserId(12345);
-		
+
+		try {
+			TaskService taskService = new TaskService();
+
+			Task newTask = new Task();
+
+			newTask.setId(1234);
+			newTask.setName("backyard");
+			String date = "12/09/2023";
+			LocalDate updateDuedate = TaskService.convertToDate(date);
+			newTask.setDueDate(updateDuedate);
+			newTask.setActive(true);
+
+			taskService.createTask(newTask);
+			taskService.getAllTask();
+		} catch (ValidationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

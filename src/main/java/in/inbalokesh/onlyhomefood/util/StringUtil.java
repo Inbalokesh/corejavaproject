@@ -1,5 +1,7 @@
 package in.inbalokesh.onlyhomefood.util;
 
+import java.time.LocalDate;
+
 import in.inbalokesh.onlyhomefood.exception.ValidationException;
 
 public class StringUtil {
@@ -23,5 +25,12 @@ public class StringUtil {
 			return true;
 		}
 		return false;
+	}
+	
+	public static void rejectIfInvalidDate(LocalDate date, String inputName) throws ValidationException {
+		LocalDate currentDate = LocalDate.now();
+		if (date.isBefore(currentDate)) {
+			throw new ValidationException(inputName.concat(" can not be in the Past"));
+		}
 	}
 }

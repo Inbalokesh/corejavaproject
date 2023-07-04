@@ -88,9 +88,9 @@ public class TestCreateUser {
 
 		assertTrue(expectedMessage.equals(receivedMessage));
 	}
-	
+
 //	Password
-	
+
 	@Test
 	public void testUserWithPasswordNull() {
 		UserService userService = new UserService();
@@ -137,9 +137,9 @@ public class TestCreateUser {
 
 		assertTrue(expectedMessage.equals(receivedMessage));
 	}
-	
+
 //	First Name
-	
+
 	@Test
 	public void testUserWithFirstNameNull() {
 		UserService userService = new UserService();
