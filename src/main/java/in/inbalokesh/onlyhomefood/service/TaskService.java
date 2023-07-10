@@ -58,7 +58,9 @@ public class TaskService {
 	}
 
 	public static LocalDate convertToDate(String dateString) {
+		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		
 		try {
 			LocalDate localDate = LocalDate.parse(dateString, formatter);
 			return localDate;
@@ -67,5 +69,4 @@ public class TaskService {
 			return null;
 		}
 	}
-
 }

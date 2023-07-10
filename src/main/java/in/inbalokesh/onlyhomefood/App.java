@@ -12,24 +12,24 @@ public class App {
 
 	public static void main(String[] args) {
 
-		try {
-			UserService userService = new UserService();
-
-			User newUser = new User();
-
-			newUser.setId(12345);
-			newUser.setEmail("inba@gmail.com");
-			newUser.setFirstName("Inba");
-			newUser.setLastName("Lokesh");
-			newUser.setPassword("14");
-			newUser.setActive(true);
-
-			userService.create(newUser);
-			userService.getAll();
-		} catch (Exception e) {
-			e.printStackTrace();
-			
-		}
+//		try {
+//			UserService userService = new UserService();
+//
+//			User newUser = new User();
+//
+//			newUser.setId(12345);
+//			newUser.setEmail("inba@gmail.com");
+//			newUser.setFirstName("Inba");
+//			newUser.setLastName("Lokesh");
+//			newUser.setPassword("14");
+//			newUser.setActive(true);
+//
+//			userService.create(newUser);
+//			userService.getAll();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			
+//		}
 
 //		userService.update();
 //		userService.delete();
@@ -40,13 +40,13 @@ public class App {
 
 			Task newTask = new Task();
 
-			newTask.setId(1234);
-			newTask.setName("backyard");
-			String date = "12/09/2023";
+			newTask.setId(1233);
+			newTask.setName("abcdedf");
+			String date = "2/22/2025";
 			LocalDate updateDuedate = TaskService.convertToDate(date);
 			newTask.setDueDate(updateDuedate);
+			
 			newTask.setActive(true);
-
 			taskService.createTask(newTask);
 			taskService.getAllTask();
 		} catch (ValidationException e) {
