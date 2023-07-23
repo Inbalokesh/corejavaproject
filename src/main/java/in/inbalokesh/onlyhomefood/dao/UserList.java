@@ -1,9 +1,11 @@
 package in.inbalokesh.onlyhomefood.dao;
 
-import in.inbalokesh.onlyhomefood.model.User;
+import java.util.HashSet;
+import java.util.Set;
+import in.inbalokesh.onlyhomefood.model.UserEntity;
 
 public class UserList {
 
-	public static User[] listOfUsers = new User[10];
+	public static Set<UserEntity> listOfUsers = new HashSet<>();
 
 }

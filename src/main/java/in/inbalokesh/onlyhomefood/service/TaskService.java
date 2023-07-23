@@ -2,59 +2,49 @@ package in.inbalokesh.onlyhomefood.service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
 
 import in.inbalokesh.onlyhomefood.dao.TaskDAO;
 import in.inbalokesh.onlyhomefood.exception.ValidationException;
-import in.inbalokesh.onlyhomefood.model.Task;
+import in.inbalokesh.onlyhomefood.model.TaskEntity;
 import in.inbalokesh.onlyhomefood.validation.TaskValidator;
 
 public class TaskService {
 
-	public Task[] getAllTask() {
+	public Set<TaskEntity> getAllTask() {
 
 		TaskDAO taskDao = new TaskDAO();
-		Task[] taskList = taskDao.findAllTask();
-		for (int i = 0; i < taskList.length; i++) {
-			System.out.println(taskList[i]);
-		}
-		return taskList;
-	}
+		Set<TaskEntity> taskList = taskDao.findAll();
+		 for (TaskEntity name : taskList) {
+	    	 System.out.println(name);		
+					}
+		 
+		 return taskList;
+	 }
 
-	public Task findTask(int id) {
+	public TaskEntity findById(int id) {
 
 		TaskDAO taskDao = new TaskDAO();
-		Task task = taskDao.findTaskById(id);
+		TaskEntity task = taskDao.findById(id);
 		System.out.println(task);
 		return task;
 
 	}
 
-	public void createTask(Task newTask) throws ValidationException {
+	public void createTask(TaskEntity newTask) throws ValidationException {
 		TaskValidator.validate(newTask);
 		TaskDAO taskDao = new TaskDAO();
-		taskDao.createTask(newTask);
-
+		taskDao.create(newTask);
 	}
 
-	public void update() {
-		Task updateTask = new Task();
-		updateTask.setName("abcd");
-//		updateTask.setDueDate(03-11-2022);
-
+	public void update(int id, TaskEntity updateTask) {	
 		TaskDAO newTaskDao = new TaskDAO();
-		newTaskDao.updateTask(updateTask.getId(), updateTask);
-
+		newTaskDao.update(id, updateTask);
 	}
 
-	public void delete() {
-
-		Task deleteTask = new Task();
-
-		deleteTask.setId(111);
-
+	public void delete(int id) {
 		TaskDAO newUserDao = new TaskDAO();
-
-		newUserDao.deleteTask(deleteTask.getId());
+		newUserDao.delete(id);
 	}
 
 	public static LocalDate convertToDate(String dateString) {

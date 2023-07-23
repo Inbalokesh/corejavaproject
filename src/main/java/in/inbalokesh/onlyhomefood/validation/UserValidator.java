@@ -1,12 +1,12 @@
 package in.inbalokesh.onlyhomefood.validation;
 
 import in.inbalokesh.onlyhomefood.exception.ValidationException;
-import in.inbalokesh.onlyhomefood.model.User;
+import in.inbalokesh.onlyhomefood.model.UserEntity;
 import in.inbalokesh.onlyhomefood.util.StringUtil;
 
 public class UserValidator {
 
-	public static void validate(User user) throws ValidationException {
+	public static void validate(UserEntity user) throws ValidationException {
 
 		if (user == null) {
 

@@ -1,9 +1,11 @@
 package in.inbalokesh.onlyhomefood.dao;
 
-import in.inbalokesh.onlyhomefood.model.Task;
+import java.util.HashSet;
+import java.util.Set;
+import in.inbalokesh.onlyhomefood.model.TaskEntity;
 
 public class TaskList {
 	
-	public static Task[] listOfTasks = new Task[10];
+	public static Set<TaskEntity> listOfTasks = new HashSet<>();
 
 }

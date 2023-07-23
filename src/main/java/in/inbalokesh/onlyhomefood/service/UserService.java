@@ -1,54 +1,47 @@
 package in.inbalokesh.onlyhomefood.service;
 
+import java.util.Set;
+
 import in.inbalokesh.onlyhomefood.dao.UserDAO;
-import in.inbalokesh.onlyhomefood.model.User;
+import in.inbalokesh.onlyhomefood.model.UserEntity;
 import in.inbalokesh.onlyhomefood.validation.UserValidator;
 
 public class UserService {
 
-	public User[] getAll() {
+	public Set<UserEntity> getAll() {
 		UserDAO userDao = new UserDAO();
-		User[] userList = userDao.findAll();
-		for (int i = 0; i < userList.length; i++) {
-			System.out.println(userList[i]);
+		Set<UserEntity> userList = userDao.findAll();
+		for (UserEntity name : userList) {
+			System.out.println(name);
 		}
 		return userList;
 	}
 
-	public User findUserId(int userId) {
+	public UserEntity findById(int userId) {
 		UserDAO userDao = new UserDAO();
-		User user = userDao.findById(userId);
-		System.out.println(user);
-		return user;
+		return userDao.findById(userId);
 	}
 
-	public void create(User newUser) throws Exception{
+	public void create(UserEntity newUser) throws Exception {
 		UserValidator.validate(newUser);
 		UserDAO userDao = new UserDAO();
 		userDao.create(newUser);
 	}
 
-	public void update() {
-		User updateUser = new User();
-		updateUser.setFirstName("Vanakam da");
-		updateUser.setLastName("Maapla");
-		updateUser.setPassword("14333");
+	public void update(int id, UserEntity updateUser) {
 		UserDAO newUserDao = new UserDAO();
-		newUserDao.update(updateUser.getId(), updateUser);
+		newUserDao.update(id, updateUser);
 
 	}
 
-	public void delete() {
-
-		User deleteUser = new User();
-
-		deleteUser.setId(12345);
-
+	public void delete(int id) {
 		UserDAO newUserDao = new UserDAO();
-
-		newUserDao.delete(deleteUser.getId());
-
+		newUserDao.delete(id);
+	}
+	
+	public UserEntity findByEmailId(String email) {
+		UserDAO newUserDao = new UserDAO();
+		return newUserDao.findByEmailId(email);
 	}
 
 }
-

@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
 import in.inbalokesh.onlyhomefood.exception.ValidationException;
-import in.inbalokesh.onlyhomefood.model.Task;
+import in.inbalokesh.onlyhomefood.model.TaskEntity;
 import in.inbalokesh.onlyhomefood.service.TaskService;
 
 public class TestCreateTask {
@@ -18,13 +18,13 @@ public class TestCreateTask {
 	public void testCreateTaskWithValidInput() {
 		TaskService taskService = new TaskService();
 
-		Task newTask = new Task();
+		TaskEntity newTask = new TaskEntity();
 		newTask.setId(12345);
-		
+
 		String date = "12/09/2023";
 		LocalDate updateDuedate = TaskService.convertToDate(date);
 		newTask.setDueDate(updateDuedate);
-		
+
 		newTask.setName("abcd");
 		newTask.setActive(true);
 
@@ -51,7 +51,7 @@ public class TestCreateTask {
 	public void testTaskWithNameNull() {
 		TaskService taskService = new TaskService();
 
-		Task newTask = new Task();
+		TaskEntity newTask = new TaskEntity();
 		newTask.setId(12345);
 		String date = "12/09/2023";
 		LocalDate updateDuedate = TaskService.convertToDate(date);
@@ -72,9 +72,9 @@ public class TestCreateTask {
 
 	@Test
 	public void testTaskWithNameEmpty() {
-		
+
 		TaskService taskService = new TaskService();
-		Task newTask = new Task();
+		TaskEntity newTask = new TaskEntity();
 		newTask.setId(12345);
 		String date = "12/09/2023";
 		LocalDate updateDuedate = TaskService.convertToDate(date);
@@ -88,21 +88,20 @@ public class TestCreateTask {
 		String receivedMessage = exception.getMessage();
 		assertTrue(expectedMessage.equals(receivedMessage));
 	}
-	
+
 	@Test
 	public void testCreateTaskWithInvalidDate() {
 		TaskService taskService = new TaskService();
 		Exception exception = assertThrows(ValidationException.class, () -> {
-			Task newTask = new Task();
+			TaskEntity newTask = new TaskEntity();
 			newTask.setId(111);
-			String userInput = "23/07/2022";
 			newTask.setName("Abcd");
-			LocalDate convertedDate = TaskService.convertToDate(userInput);
+			LocalDate convertedDate = LocalDate.of(2021, 8, 19);
 			newTask.setDueDate(convertedDate);
 			newTask.setActive(true);
 			taskService.createTask(newTask);
 		});
-		String expectedMessage = "Due Date can not be in the Past";
+		String expectedMessage = "Date can not be in the Past";
 		String actualMessage = exception.getMessage();
 		assertTrue(expectedMessage.equals(actualMessage));
 	}

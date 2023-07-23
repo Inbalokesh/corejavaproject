@@ -1,93 +1,77 @@
 package in.inbalokesh.onlyhomefood.dao;
 
-import in.inbalokesh.onlyhomefood.model.Task;
+import java.util.Set;
+import in.inbalokesh.onlyhomefood.Interface.TaskInterface;
+import in.inbalokesh.onlyhomefood.model.TaskEntity;
 
-public class TaskDAO {
+public class TaskDAO implements TaskInterface {
+	
+	public Set<TaskEntity> findAll() {
 
-	public Task[] findAllTask() {
-
-		Task[] taskList = TaskList.listOfTasks;
+		Set<TaskEntity> taskList = TaskList.listOfTasks;
 
 		return taskList;
 	}
 
-	public void createTask(Task newTask) {
+	@Override
+	public void create(TaskEntity newTask) {
 
-		Task[] list = TaskList.listOfTasks;
+		Set<TaskEntity> list = TaskList.listOfTasks;
 
-		for (int i = 0; i < list.length; i++) {
+		list.add(newTask);
+	}
 
-			Task task = list[i];
+	@Override
+	public void update(int id, TaskEntity updateTask) {
 
-			if (task == null) {
-				list[i] = newTask;
+		Set<TaskEntity> list = TaskList.listOfTasks;
+
+		for (TaskEntity name : list) {
+
+			TaskEntity task = name;
+
+			if (task.getId() == id) {
+				task.setName(updateTask.getName());
+				task.setDueDate(updateTask.getDueDate());
 				break;
 			}
 		}
 	}
-	
-	public void updateTask(int id, Task updateTask) {
-		
-		Task[] list = TaskList.listOfTasks;
 
-		for (int i = 0; i < list.length; i++) {
+	@Override
+	public void delete(int id) {
 
-			Task task = list[i];
-			
-			if (task == null) {
-				continue;
-			}
-			
-			if(task.getId() == id) {
-				
-				list[i].setName(updateTask.getName());
-				list[i].setDueDate(updateTask.getDueDate());
-				break;
-			}
-		}
-	}
-	
-	public void deleteTask(int id) {
-		
-		Task[] list = TaskList.listOfTasks;
+		Set<TaskEntity> list = TaskList.listOfTasks;
 
-		for (int i = 0; i < list.length; i++) {
+		for (TaskEntity name : list) {
 
-			Task task = list[i];
-			
-			if (task == null) {
-				continue;
-			}
-			if(task.getId() == id) {
+			TaskEntity task = name;
+
+			if (task.getId() == id) {
 				task.setActive(false);
 				break;
 			}
-			
 		}
 	}
-	
-	public Task findTaskById(int taskId) {
-		
-		Task[] taskList = TaskList.listOfTasks;
-		
-		Task taskMatch = null;
-		
-		for(int i = 0; i < taskList.length; i++) {
-			
-			Task task = taskList[i];
-			
-			if(task == null) {
-				
-				continue;
-			}
-			
-			if(task.getId() == taskId) {
-				
+
+	@Override
+	public TaskEntity findById(int taskId) {
+
+		Set<TaskEntity> taskList = TaskList.listOfTasks;
+
+		TaskEntity taskMatch = null;
+
+		for (TaskEntity name : taskList) {
+
+			TaskEntity task = name;
+
+			if (task.getId() == taskId) {
 				taskMatch = task;
 				break;
 			}
 		}
 		return taskMatch;
 	}
+
 
 }

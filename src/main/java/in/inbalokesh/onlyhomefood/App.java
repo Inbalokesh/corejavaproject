@@ -3,8 +3,8 @@ package in.inbalokesh.onlyhomefood;
 import java.time.LocalDate;
 
 import in.inbalokesh.onlyhomefood.exception.ValidationException;
-import in.inbalokesh.onlyhomefood.model.Task;
-import in.inbalokesh.onlyhomefood.model.User;
+import in.inbalokesh.onlyhomefood.model.TaskEntity;
+import in.inbalokesh.onlyhomefood.model.UserEntity;
 import in.inbalokesh.onlyhomefood.service.TaskService;
 import in.inbalokesh.onlyhomefood.service.UserService;
 
@@ -12,24 +12,23 @@ public class App {
 
 	public static void main(String[] args) {
 
-//		try {
-//			UserService userService = new UserService();
-//
-//			User newUser = new User();
-//
-//			newUser.setId(12345);
-//			newUser.setEmail("inba@gmail.com");
-//			newUser.setFirstName("Inba");
-//			newUser.setLastName("Lokesh");
-//			newUser.setPassword("14");
-//			newUser.setActive(true);
-//
-//			userService.create(newUser);
-//			userService.getAll();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			
-//		}
+		try {
+			UserService userService = new UserService();
+
+			UserEntity newUser = new UserEntity();
+
+			newUser.setId(12345);
+			newUser.setEmail("inba@gmail.com");
+			newUser.setFirstName("Inba");
+			newUser.setLastName("Lokesh");
+			newUser.setPassword("14");
+			newUser.setActive(true);
+
+			userService.create(newUser);
+			userService.getAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 //		userService.update();
 //		userService.delete();
@@ -38,12 +37,11 @@ public class App {
 		try {
 			TaskService taskService = new TaskService();
 
-			Task newTask = new Task();
+			TaskEntity newTask = new TaskEntity();
 
 			newTask.setId(1233);
 			newTask.setName("abcdedf");
-			String date = "2/22/2025";
-			LocalDate updateDuedate = TaskService.convertToDate(date);
+			LocalDate updateDuedate = LocalDate.of(2023, 8, 19);
 			newTask.setDueDate(updateDuedate);
 			
 			newTask.setActive(true);
