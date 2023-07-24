@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
 import in.inbalokesh.onlyhomefood.exception.ValidationException;
-import in.inbalokesh.onlyhomefood.model.TaskEntity;
+import in.inbalokesh.onlyhomefood.model.Task;
 import in.inbalokesh.onlyhomefood.service.TaskService;
 
 public class TestCreateTask {
@@ -18,7 +18,7 @@ public class TestCreateTask {
 	public void testCreateTaskWithValidInput() {
 		TaskService taskService = new TaskService();
 
-		TaskEntity newTask = new TaskEntity();
+		Task newTask = new Task();
 		newTask.setId(12345);
 
 		String date = "12/09/2023";
@@ -51,7 +51,7 @@ public class TestCreateTask {
 	public void testTaskWithNameNull() {
 		TaskService taskService = new TaskService();
 
-		TaskEntity newTask = new TaskEntity();
+		Task newTask = new Task();
 		newTask.setId(12345);
 		String date = "12/09/2023";
 		LocalDate updateDuedate = TaskService.convertToDate(date);
@@ -74,7 +74,7 @@ public class TestCreateTask {
 	public void testTaskWithNameEmpty() {
 
 		TaskService taskService = new TaskService();
-		TaskEntity newTask = new TaskEntity();
+		Task newTask = new Task();
 		newTask.setId(12345);
 		String date = "12/09/2023";
 		LocalDate updateDuedate = TaskService.convertToDate(date);
@@ -93,7 +93,7 @@ public class TestCreateTask {
 	public void testCreateTaskWithInvalidDate() {
 		TaskService taskService = new TaskService();
 		Exception exception = assertThrows(ValidationException.class, () -> {
-			TaskEntity newTask = new TaskEntity();
+			Task newTask = new Task();
 			newTask.setId(111);
 			newTask.setName("Abcd");
 			LocalDate convertedDate = LocalDate.of(2021, 8, 19);

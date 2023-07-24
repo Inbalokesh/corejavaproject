@@ -1,10 +1,10 @@
 package in.inbalokesh.onlyhomefood.Interface;
 
-import in.inbalokesh.onlyhomefood.model.UserEntity;
+import in.inbalokesh.onlyhomefood.model.User;
 
-public interface UserInterface extends Base<UserEntity> {
+public interface UserInterface extends Base<User> {
 
-	public abstract UserEntity findByEmailId(String email);
+	public abstract User findByEmailId(String email);
 
 	public abstract int count();
 

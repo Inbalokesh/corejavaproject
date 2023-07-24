@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import in.inbalokesh.onlyhomefood.exception.ValidationException;
-import in.inbalokesh.onlyhomefood.model.UserEntity;
+import in.inbalokesh.onlyhomefood.model.User;
 import in.inbalokesh.onlyhomefood.service.UserService;
 
 public class TestCreateUser {
@@ -15,7 +15,7 @@ public class TestCreateUser {
 	public void testCreateUserWithValidInput() {
 		UserService userService = new UserService();
 
-		UserEntity newUser = new UserEntity();
+		User newUser = new User();
 		newUser.setId(12345);
 		newUser.setEmail("inba@gmail.com");
 		newUser.setFirstName("Inba");
@@ -46,7 +46,7 @@ public class TestCreateUser {
 	public void testUserWithEmailNull() {
 		UserService userService = new UserService();
 
-		UserEntity newUser = new UserEntity();
+		User newUser = new User();
 		newUser.setId(12345);
 		newUser.setEmail(null);
 		newUser.setFirstName("Inba");
@@ -70,7 +70,7 @@ public class TestCreateUser {
 
 		UserService userService = new UserService();
 
-		UserEntity newUser = new UserEntity();
+		User newUser = new User();
 		newUser.setId(12345);
 		newUser.setEmail("");
 		newUser.setFirstName("Inba");
@@ -95,7 +95,7 @@ public class TestCreateUser {
 	public void testUserWithPasswordNull() {
 		UserService userService = new UserService();
 
-		UserEntity newUser = new UserEntity();
+		User newUser = new User();
 		newUser.setId(12345);
 		newUser.setEmail("inba@gmail.com");
 		newUser.setFirstName("Inba");
@@ -119,7 +119,7 @@ public class TestCreateUser {
 
 		UserService userService = new UserService();
 
-		UserEntity newUser = new UserEntity();
+		User newUser = new User();
 		newUser.setId(12345);
 		newUser.setEmail("inba@gmail.com");
 		newUser.setFirstName("Inba");
@@ -144,7 +144,7 @@ public class TestCreateUser {
 	public void testUserWithFirstNameNull() {
 		UserService userService = new UserService();
 
-		UserEntity newUser = new UserEntity();
+		User newUser = new User();
 		newUser.setId(12345);
 		newUser.setEmail("inba@gmail.com");
 		newUser.setFirstName(null);
@@ -168,7 +168,7 @@ public class TestCreateUser {
 
 		UserService userService = new UserService();
 
-		UserEntity newUser = new UserEntity();
+		User newUser = new User();
 		newUser.setId(12345);
 		newUser.setEmail("inba@gmail.com");
 		newUser.setFirstName("");

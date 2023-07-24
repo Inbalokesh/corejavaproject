@@ -7,7 +7,7 @@ import in.inbalokesh.onlyhomefood.exception.ValidationException;
 public class StringUtil {
 
 	public static void rejectIfInvaildString(String input, String inputName) throws ValidationException {
-		
+
 		if (input == null || "".equals(input.trim())) {
 			throw new ValidationException(inputName.concat(" cannot be null or empty"));
 		}
@@ -18,7 +18,7 @@ public class StringUtil {
 			return false;
 		}
 		return true;
-	} 
+	}
 
 	public static boolean isInValid(String input) {
 		if (input == null || "".equals(input.trim())) {
@@ -26,7 +26,7 @@ public class StringUtil {
 		}
 		return false;
 	}
-	
+
 	public static void rejectIfInvalidDate(LocalDate date, String inputName) throws ValidationException {
 		LocalDate currentDate = LocalDate.now();
 		if (date.isBefore(currentDate)) {

@@ -6,38 +6,38 @@ import java.util.Set;
 
 import in.inbalokesh.onlyhomefood.dao.TaskDAO;
 import in.inbalokesh.onlyhomefood.exception.ValidationException;
-import in.inbalokesh.onlyhomefood.model.TaskEntity;
+import in.inbalokesh.onlyhomefood.model.Task;
 import in.inbalokesh.onlyhomefood.validation.TaskValidator;
 
 public class TaskService {
 
-	public Set<TaskEntity> getAllTask() {
+	public Set<Task> getAllTask() {
 
 		TaskDAO taskDao = new TaskDAO();
-		Set<TaskEntity> taskList = taskDao.findAll();
-		 for (TaskEntity name : taskList) {
-	    	 System.out.println(name);		
-					}
-		 
-		 return taskList;
-	 }
+		Set<Task> taskList = taskDao.findAll();
+		for (Task name : taskList) {
+			System.out.println(name);
+		}
 
-	public TaskEntity findById(int id) {
+		return taskList;
+	}
+
+	public Task findById(int id) {
 
 		TaskDAO taskDao = new TaskDAO();
-		TaskEntity task = taskDao.findById(id);
+		Task task = taskDao.findById(id);
 		System.out.println(task);
 		return task;
 
 	}
 
-	public void createTask(TaskEntity newTask) throws ValidationException {
+	public void createTask(Task newTask) throws ValidationException {
 		TaskValidator.validate(newTask);
 		TaskDAO taskDao = new TaskDAO();
 		taskDao.create(newTask);
 	}
 
-	public void update(int id, TaskEntity updateTask) {	
+	public void update(int id, Task updateTask) {
 		TaskDAO newTaskDao = new TaskDAO();
 		newTaskDao.update(id, updateTask);
 	}
@@ -48,9 +48,9 @@ public class TaskService {
 	}
 
 	public static LocalDate convertToDate(String dateString) {
-		
+
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		
+
 		try {
 			LocalDate localDate = LocalDate.parse(dateString, formatter);
 			return localDate;

@@ -2,7 +2,7 @@ package in.inbalokesh.onlyhomefood.model;
 
 import java.time.LocalDate;
 
-public class TaskEntity {
+public abstract class TaskEntity {
 
 	int id;
 	String name;
@@ -56,7 +56,7 @@ public class TaskEntity {
 			} else {
 				return -1;
 			}
-			//return ( this.getId() > o.getId()) ? 1: -1;
+			// return ( this.getId() > o.getId()) ? 1: -1;
 		}
 	}
 

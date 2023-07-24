@@ -2,33 +2,33 @@ package in.inbalokesh.onlyhomefood.dao;
 
 import java.util.Set;
 import in.inbalokesh.onlyhomefood.Interface.TaskInterface;
-import in.inbalokesh.onlyhomefood.model.TaskEntity;
+import in.inbalokesh.onlyhomefood.model.Task;
 
 public class TaskDAO implements TaskInterface {
-	
-	public Set<TaskEntity> findAll() {
 
-		Set<TaskEntity> taskList = TaskList.listOfTasks;
+	public Set<Task> findAll() {
+
+		Set<Task> taskList = TaskList.listOfTasks;
 
 		return taskList;
 	}
 
 	@Override
-	public void create(TaskEntity newTask) {
+	public void create(Task newTask) {
 
-		Set<TaskEntity> list = TaskList.listOfTasks;
+		Set<Task> list = TaskList.listOfTasks;
 
 		list.add(newTask);
 	}
 
 	@Override
-	public void update(int id, TaskEntity updateTask) {
+	public void update(int id, Task updateTask) {
 
-		Set<TaskEntity> list = TaskList.listOfTasks;
+		Set<Task> list = TaskList.listOfTasks;
 
-		for (TaskEntity name : list) {
+		for (Task name : list) {
 
-			TaskEntity task = name;
+			Task task = name;
 
 			if (task.getId() == id) {
 				task.setName(updateTask.getName());
@@ -41,11 +41,11 @@ public class TaskDAO implements TaskInterface {
 	@Override
 	public void delete(int id) {
 
-		Set<TaskEntity> list = TaskList.listOfTasks;
+		Set<Task> list = TaskList.listOfTasks;
 
-		for (TaskEntity name : list) {
+		for (Task name : list) {
 
-			TaskEntity task = name;
+			Task task = name;
 
 			if (task.getId() == id) {
 				task.setActive(false);
@@ -55,15 +55,15 @@ public class TaskDAO implements TaskInterface {
 	}
 
 	@Override
-	public TaskEntity findById(int taskId) {
+	public Task findById(int taskId) {
 
-		Set<TaskEntity> taskList = TaskList.listOfTasks;
+		Set<Task> taskList = TaskList.listOfTasks;
 
-		TaskEntity taskMatch = null;
+		Task taskMatch = null;
 
-		for (TaskEntity name : taskList) {
+		for (Task name : taskList) {
 
-			TaskEntity task = name;
+			Task task = name;
 
 			if (task.getId() == taskId) {
 				taskMatch = task;
@@ -72,6 +72,5 @@ public class TaskDAO implements TaskInterface {
 		}
 		return taskMatch;
 	}
-
 
 }
