@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashSet;
 import java.util.Set;
 import in.inbalokesh.onlyhomefood.Interface.UserInterface;
@@ -14,16 +15,13 @@ public class UserDAO implements UserInterface {
 
 	public Set<User> findAll() throws RuntimeException {
 
-//	Set<User> userlist = UserList.listOfUsers;
-//	return userlist;
-
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Set<User> userList = new HashSet<>();
 
 		try {
-			String query = "select * from users where isActive = 1";
+			String query = "select * from users where is_active = 1";
 			con = ConnectionUtil.getConnection();
 			ps = con.prepareStatement(query);
 			rs = ps.executeQuery();
@@ -40,7 +38,7 @@ public class UserDAO implements UserInterface {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			e.getMessage();
+			System.out.println(e.getMessage());
 			throw new RuntimeException();
 
 		} finally {
@@ -56,9 +54,38 @@ public class UserDAO implements UserInterface {
 	@Override
 	public void create(User newUser) {
 
-		Set<User> arr = UserList.listOfUsers;
+		Connection con = null;
+		PreparedStatement ps = null;
 
-		arr.add(newUser);
+		try {
+			String query = "insert into users (first_name, last_name, email, password) values (?,?,?,?)";
+			con = ConnectionUtil.getConnection();
+			ps = con.prepareStatement(query);
+
+			ps.setString(1, newUser.getFirstName());
+			ps.setString(2, newUser.getLastName());
+			ps.setString(3, newUser.getEmail());
+			ps.setString(4, newUser.getPassword());
+
+			ps.executeUpdate();
+			System.out.println("User has been created sucessfully");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			throw new RuntimeException();
+
+		} 
+//		catch (SQLIntegrityConstraintViolationException e) {
+//			e.printStackTrace();
+//			System.out.println(e.getMessage());
+//			throw new SQLIntegrityConstraintViolationException();
+//
+//		
+//		}
+		finally {
+			ConnectionUtil.close(con, ps);
+		}
 
 	}
 
@@ -97,19 +124,37 @@ public class UserDAO implements UserInterface {
 	@Override
 	public User findById(int userId) {
 
-		Set<User> userlist = UserList.listOfUsers;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		User user = null;
 
-		User userMatch = null;
-		for (User name : userlist) {
+		try {
+			String query = "select * from users where is_active = 1 AND id = ?";
+			con = ConnectionUtil.getConnection();
+			ps = con.prepareStatement(query);
+			ps.setInt(1, userId);
+			rs = ps.executeQuery();
 
-			User user = name;
-
-			if (user.getId() == userId) {
-				userMatch = user;
-				break;
+			if (rs.next()) {
+				user = new User();
+				user.setId(rs.getInt("id"));
+				user.setFirstName(rs.getString("first_name"));
+				user.setLastName(rs.getString("last_name"));
+				user.setEmail(rs.getString("email"));
+				user.setPassword(rs.getString("password"));
+				user.setActive(rs.getBoolean("is_active"));
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			throw new RuntimeException();
+
+		} finally {
+			ConnectionUtil.close(con, ps, rs);
 		}
-		return userMatch;
+		return user;
+
 	}
 
 	@Override

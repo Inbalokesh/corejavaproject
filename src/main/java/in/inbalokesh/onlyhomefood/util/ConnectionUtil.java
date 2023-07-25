@@ -12,15 +12,16 @@ public class ConnectionUtil {
 	public static Connection getConnection() {
 
 		Connection connection = null;
-		String url = null;
-		String userName = null;
-		String password = null;
+//		String url = null;
+//		String userName = null;
+//		String password = null;
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection(
-					"jdbc:mysql://aws.connect.psdb.cloud/onlyhomefood?sslMode=VERIFY_IDENTITY", "d17cntmkp8626tv6qa8t",
-					"pscale_pw_7v6tD3sUSxmVvdh0rQSxRy56FLfM7m16ElWqrAEVzvQ");
+			  "jdbc:mysql://aws.connect.psdb.cloud/onlyhomefood?sslMode=VERIFY_IDENTITY",
+			  "dsc2nrrt7hx2cy8vkags",
+			  "pscale_pw_AusDWxDmuzZjrSM9LF8mTRoruI9MP8S0DsEjp95NHiR");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -34,6 +35,19 @@ public class ConnectionUtil {
 			if (rs != null) {
 				rs.close();
 			}
+			if (ps != null) {
+				ps.close();
+			}
+			if (connection != null) {
+				connection.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void close(Connection connection, PreparedStatement ps) {
+		try {
 			if (ps != null) {
 				ps.close();
 			}
