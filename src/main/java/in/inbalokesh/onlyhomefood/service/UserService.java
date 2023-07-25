@@ -11,9 +11,6 @@ public class UserService {
 	public Set<User> getAll() {
 		UserDAO userDao = new UserDAO();
 		Set<User> userList = userDao.findAll();
-//		for (User name : userList) {
-//			System.out.println(name);
-//		}
 		return userList;
 	}
 

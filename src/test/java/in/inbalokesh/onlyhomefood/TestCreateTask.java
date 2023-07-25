@@ -19,15 +19,11 @@ public class TestCreateTask {
 		TaskService taskService = new TaskService();
 
 		Task newTask = new Task();
-		newTask.setId(12345);
-
-		String date = "12/09/2023";
+		String date = "12/08/2023";
 		LocalDate updateDuedate = TaskService.convertToDate(date);
 		newTask.setDueDate(updateDuedate);
 
-		newTask.setName("abcd");
-		newTask.setActive(true);
-
+		newTask.setName("Studying");
 		assertDoesNotThrow(() -> {
 			taskService.createTask(newTask);
 		});

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashSet;
 import java.util.Set;
 import in.inbalokesh.onlyhomefood.Interface.UserInterface;
@@ -74,16 +73,7 @@ public class UserDAO implements UserInterface {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 			throw new RuntimeException();
-
-		} 
-//		catch (SQLIntegrityConstraintViolationException e) {
-//			e.printStackTrace();
-//			System.out.println(e.getMessage());
-//			throw new SQLIntegrityConstraintViolationException();
-//
-//		
-//		}
-		finally {
+		} finally {
 			ConnectionUtil.close(con, ps);
 		}
 
@@ -92,18 +82,30 @@ public class UserDAO implements UserInterface {
 	@Override
 	public void update(int id, User updateUser) {
 
-		Set<User> arr = UserList.listOfUsers;
-		for (User name : arr) {
+		Connection con = null;
+		PreparedStatement ps = null;
 
-			User user = name;
+		try {
+			String query = "update users set first_name = ?, last_name = ? where id = ?";
+			con = ConnectionUtil.getConnection();
+			ps = con.prepareStatement(query);
 
-			if (user.getId() == id) {
-				user.setFirstName(updateUser.getFirstName());
-				user.setLastName(updateUser.getLastName());
-				user.setPassword(updateUser.getPassword());
-				break;
-			}
+			ps.setString(1, updateUser.getFirstName());
+			ps.setString(2, updateUser.getLastName());
+			ps.setInt(3, id);
+
+			ps.executeUpdate();
+			System.out.println("User has been updated sucessfully");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			throw new RuntimeException();
+		} finally {
+			ConnectionUtil.close(con, ps);
 		}
+		
+
 	}
 
 	@Override

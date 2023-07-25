@@ -18,7 +18,6 @@ public class TaskService {
 		for (Task name : taskList) {
 			System.out.println(name);
 		}
-
 		return taskList;
 	}
 
