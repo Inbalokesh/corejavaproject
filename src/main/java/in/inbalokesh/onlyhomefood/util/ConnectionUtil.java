@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 import java.sql.ResultSet;
 
 public class ConnectionUtil {
@@ -12,16 +14,14 @@ public class ConnectionUtil {
 	public static Connection getConnection() {
 
 		Connection connection = null;
-//		String url = null;
-//		String userName = null;
-//		String password = null;
+		Dotenv env = Dotenv.load();
+		String url = env.get("DATABASE_HOST");
+		String userName = env.get("DATABASE_USERNAME");
+		String password = env.get("DATABASE_PASSWORD");
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			connection = DriverManager.getConnection(
-			  "jdbc:mysql://aws.connect.psdb.cloud/onlyhomefood?sslMode=VERIFY_IDENTITY",
-			  "dsc2nrrt7hx2cy8vkags",
-			  "pscale_pw_AusDWxDmuzZjrSM9LF8mTRoruI9MP8S0DsEjp95NHiR");
+			connection = DriverManager.getConnection(url, userName, password);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -45,7 +45,7 @@ public class ConnectionUtil {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void close(Connection connection, PreparedStatement ps) {
 		try {
 			if (ps != null) {
